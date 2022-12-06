@@ -59,3 +59,5 @@ def Run(angle, direction=1, wait_time=5/float(1000), STEPPER_PINS=[17,18,27,22])
 
 if __name__ == '__main__':
     Run(float(angle(angle := input('Input angle: '))))
+    
+print(5)
