@@ -8,21 +8,15 @@ def angle(a):
 
 def Direction(steps, STEPS_PER_REVOLUTION):
     if STEPS_PER_REVOLUTION > 0:
-        if steps > STEPS_PER_REVOLUTION:
-                return -1
-        elif steps < 0:
-                return 1
+        return 1
     elif STEPS_PER_REVOLUTION < 0:
-        if steps < STEPS_PER_REVOLUTION:
-                return 1
-        elif steps > 0:
-                return -1
+        return -1
 
 
-def Run(angel, direction=1, wait_time = 5/float(1000), STEPPER_PINS=[17,18,27,22]):
+def Run(angle, direction=1, wait_time=5/float(1000), STEPPER_PINS=[17,18,27,22]):
     GPIO.setmode(GPIO.BCM)
     
-    STEPS_PER_REVOLUTION = 64 * 64 * angle(angle)
+    STEPS_PER_REVOLUTION = int(64 * 64 * angle)
     SEQUENCE = [[1,0,0,0],
                 [1,1,0,0],
                 [0,1,0,0],
@@ -62,3 +56,6 @@ def Run(angel, direction=1, wait_time = 5/float(1000), STEPPER_PINS=[17,18,27,22
         print('關閉程式')
     finally:
         GPIO.cleanup()
+
+if __name__ == '__main__':
+    Run(float(angle(angle := input('Input angle: '))))
